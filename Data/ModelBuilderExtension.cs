@@ -10,7 +10,7 @@ namespace Assignment1.Data
 {
     public static class ModelBuilderExtensions
     {
-        public static void Seed(this ModelBuilder builder)
+        public static void SeedUsersRoles(this ModelBuilder builder)
         {
             var pwd = "P@$$w0rd";
             var passwordHasher = new PasswordHasher<XUser>();
@@ -57,17 +57,19 @@ financeUser,
 };
             builder.Entity<XUser>().HasData(users);
             // Seed UserRoles
-            List<IdentityUserRole<string>> userRoles = new List<IdentityUserRole<string>>();
-            userRoles.Add(new IdentityUserRole<string>
+            List<IdentityUserRole<string>> userRoles = new List<IdentityUserRole<string>>
             {
-                UserId = users[0].Id,
-                RoleId = roles.First(q => q.Name == "Admin").Id
-            });
-        userRoles.Add(new IdentityUserRole<string>
-        {
-            UserId = users[1].Id,
-            RoleId = roles.First(q => q.Name == "Finance").Id
-        });
+                new IdentityUserRole<string>
+                {
+                    UserId = users[0].Id,
+                    RoleId = roles.First(q => q.Name == "Admin").Id
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = users[1].Id,
+                    RoleId = roles.First(q => q.Name == "Finance").Id
+                }
+            };
             builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
         }
     }

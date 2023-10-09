@@ -54,6 +54,86 @@ namespace Assignment1.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Contact List",
+                columns: table => new
+                {
+                    AccountNo = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    Street = table.Column<string>(type: "TEXT", nullable: true),
+                    City = table.Column<string>(type: "TEXT", nullable: true),
+                    PostalCode = table.Column<string>(type: "TEXT", nullable: true),
+                    Country = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Modified = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contact List", x => x.AccountNo);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Donations",
+                columns: table => new
+                {
+                    TransId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AccountNo = table.Column<int>(type: "INTEGER", nullable: false),
+                    TransactionTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Amount = table.Column<float>(type: "REAL", nullable: false),
+                    PaymentMethodId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Modified = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Donations", x => x.TransId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PaymentMethod",
+                columns: table => new
+                {
+                    PaymentMethodId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Modified = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentMethod", x => x.PaymentMethodId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TransactionType",
+                columns: table => new
+                {
+                    TransactionTypeId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Modified = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransactionType", x => x.TransactionTypeId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -164,8 +244,8 @@ namespace Assignment1.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4255dd93-ed80-42f1-b58a-b9ca7329ba57", null, new DateTime(2023, 10, 9, 12, 15, 30, 231, DateTimeKind.Local).AddTicks(6050), "Finance", "FINANCE" },
-                    { "ffecb5dc-5d78-4c12-b7ef-8f28294646de", null, new DateTime(2023, 10, 9, 12, 15, 30, 231, DateTimeKind.Local).AddTicks(5990), "Admin", "ADMIN" }
+                    { "5eb2dd08-4d52-47ea-8294-029420855d8a", null, new DateTime(2023, 10, 9, 13, 2, 16, 281, DateTimeKind.Local).AddTicks(4340), "Admin", "ADMIN" },
+                    { "8ee2052e-c563-4452-a8dd-e207d94fb658", null, new DateTime(2023, 10, 9, 13, 2, 16, 281, DateTimeKind.Local).AddTicks(4410), "Finance", "FINANCE" }
                 });
 
             migrationBuilder.InsertData(
@@ -173,8 +253,48 @@ namespace Assignment1.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "330901b4-7093-42ad-91e8-e49280416fdb", 0, "a21150b2-276f-49e1-bcf6-646535bef8af", "a@a.a", true, false, null, "A@A.A", "A@A.A", "AQAAAAIAAYagAAAAECTeqVXFcCWcrBOXYFKim3fqDqvYHo7hvL6CjrJgaXX/kx6G9MhEVFa9U38A7VhaMw==", null, false, "a89fad73-d09c-419c-b9ea-96dd6c53b4f1", false, "a@a.a" },
-                    { "be2f5491-15fd-4a99-bb42-9ad6e43129ba", 0, "fca6c547-d0ea-4166-b3a7-0e22e9823fdd", "f@f.f", true, false, null, "F@F.F", "F@F.F", "AQAAAAIAAYagAAAAELGI93V68IJju6ombNVDKgt3rg9hDKwkwgcDhaXiH2FGvtwnPOhHDcSHxwW7n1Bkew==", null, false, "c6b9159b-b73a-47a0-bfd5-ace328ac93f0", false, "f@f.f" }
+                    { "d29ed9a1-475f-4478-902d-177729b635b6", 0, "3a1bde5d-bcfa-4504-8d2b-8e35cdf29160", "a@a.a", true, false, null, "A@A.A", "A@A.A", "AQAAAAIAAYagAAAAEN8QggkqtMwembp6Bf8BqbJv/YhmK0eag2O8UWMh1rX6rKKjs+5xntCQ1O1FTZZtEA==", null, false, "66ec0a01-4e77-49b2-923b-e85739bd1369", false, "a@a.a" },
+                    { "e806193e-c63a-4bd4-aead-9c052c77b69c", 0, "49cb53e3-ed28-4b77-b4dd-7e86ff20b42f", "f@f.f", true, false, null, "F@F.F", "F@F.F", "AQAAAAIAAYagAAAAEO0NzvQ087CZPAGfJFo4jpRBA4r1feDnfFFl14Rb/i4Plb6A5h/CStxrwYIxxcakXg==", null, false, "6f4d9553-5022-489f-bdc9-2a55de63295d", false, "f@f.f" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Contact List",
+                columns: new[] { "AccountNo", "City", "Country", "Created", "CreatedBy", "Email", "FirstName", "LastName", "Modified", "ModifiedBy", "PostalCode", "Street" },
+                values: new object[,]
+                {
+                    { 1, "Maple Ridge", "Canada", new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6700), "Admin", "john.doe@example.com", "John", "Doe", new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6710), "Admin", "12345", "123 Main St" },
+                    { 2, "Dallas", "USA", new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6710), "Admin", "jane.smith@example.com", "Jane", "Smith", new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6710), "Admin", "67890", "456 Elm St" },
+                    { 3, "Oakville", "Canada", new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6720), "Admin", "alice.johnson@example.com", "Alice", "Johnson", new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6720), "Admin", "54321", "789 Oak St" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Donations",
+                columns: new[] { "TransId", "AccountNo", "Amount", "Created", "CreatedBy", "Date", "Modified", "ModifiedBy", "Notes", "PaymentMethodId", "TransactionTypeId" },
+                values: new object[,]
+                {
+                    { 1, 1, 100f, new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170), "Admin", new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7160), new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170), "Admin", "Donation 1", 1, 1 },
+                    { 2, 2, 200f, new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170), "Admin", new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170), new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170), "Admin", "Dontation 2", 2, 2 },
+                    { 3, 3, 300f, new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7180), "Admin", new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7180), new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7180), "Admin", "Donation 3", 3, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PaymentMethod",
+                columns: new[] { "PaymentMethodId", "Created", "CreatedBy", "Modified", "ModifiedBy", "Name" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2610), "Admin", new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2620), "Admin", "Cash" },
+                    { 2, new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2620), "Admin", new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2630), "Admin", "Credit Card" },
+                    { 3, new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2630), "Admin", new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2630), "Admin", "PayPal" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TransactionType",
+                columns: new[] { "TransactionTypeId", "Created", "CreatedBy", "Description", "Modified", "ModifiedBy", "Name" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9900), "Admin", "Donation", new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9910), "Admin", "Donation" },
+                    { 2, new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9920), "Admin", "Pledge", new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9920), "Admin", "Pledge" },
+                    { 3, new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9920), "Admin", "Event", new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9920), "Admin", "Event" }
                 });
 
             migrationBuilder.InsertData(
@@ -182,8 +302,8 @@ namespace Assignment1.Data.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "ffecb5dc-5d78-4c12-b7ef-8f28294646de", "330901b4-7093-42ad-91e8-e49280416fdb" },
-                    { "4255dd93-ed80-42f1-b58a-b9ca7329ba57", "be2f5491-15fd-4a99-bb42-9ad6e43129ba" }
+                    { "5eb2dd08-4d52-47ea-8294-029420855d8a", "d29ed9a1-475f-4478-902d-177729b635b6" },
+                    { "8ee2052e-c563-4452-a8dd-e207d94fb658", "e806193e-c63a-4bd4-aead-9c052c77b69c" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -241,6 +361,18 @@ namespace Assignment1.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Contact List");
+
+            migrationBuilder.DropTable(
+                name: "Donations");
+
+            migrationBuilder.DropTable(
+                name: "PaymentMethod");
+
+            migrationBuilder.DropTable(
+                name: "TransactionType");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

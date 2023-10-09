@@ -19,6 +19,7 @@ options =>
 .AddDefaultUI()
 .AddDefaultTokenProviders()
 .AddRoles<XRole>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

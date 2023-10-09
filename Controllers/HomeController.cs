@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Assignment1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assignment1.Controllers;
 
@@ -13,10 +14,13 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    [Authorize(Roles = "Admin")]
     public IActionResult Index()
     {
         return View();
     }
+
+    [Authorize(Roles = "Finance")]
 
     public IActionResult Privacy()
     {
