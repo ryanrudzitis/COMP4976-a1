@@ -19,12 +19,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="AccountNo" class="control-label"></label>
-                <input asp-for="AccountNo" class="form-control" />
+                <select asp-for="AccountNo" asp-items="@(ViewData["contactListSelectList"] as SelectList)"
+                    class="form-control">
+                    <option value="">-- Select AccountNo --</option>
+                </select>
                 <span asp-validation-for="AccountNo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TransactionTypeId" class="control-label"></label>
-                <input asp-for="TransactionTypeId" class="form-control" />
+                <select asp-for="TransactionTypeId" asp-items="@(ViewData["transactionTypeSelectList"] as SelectList)"
+                    class="form-control">
+                    <option value="">-- Select TransactionTypeId --</option>
+                </select>
                 <span asp-validation-for="TransactionTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -34,9 +40,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="PaymentMethodId" class="control-label"></label>
-                <input asp-for="PaymentMethodId" class="form-control" />
+                <select asp-for="PaymentMethodId" asp-items="@(ViewData["PaymentMethodSelectList"] as SelectList)"
+                    class="form-control">
+                    <option value="">-- Select Payment Method --</option>
+                </select>
                 <span asp-validation-for="PaymentMethodId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Notes" class="control-label"></label>
                 <input asp-for="Notes" class="form-control" />
@@ -72,4 +82,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

@@ -48,8 +48,21 @@ namespace Assignment1.Controllers
         // GET: Donations/Create
         public IActionResult Create()
         {
+            var transactionTypes = _context.TransactionType.Select(x => x.TransactionTypeId).Distinct().ToList();
+            var transactionTypeSelectList = new SelectList(transactionTypes);
+
+            var paymentMethods = _context.PaymentMethod.Select(x => x.PaymentMethodId).Distinct().ToList();
+            var paymentMethodSelectList = new SelectList(paymentMethods);
+
+            var ContactList = _context.ContactList.Select(x => x.AccountNo).Distinct().ToList();
+            var ContactListSelectList = new SelectList(ContactList);
+
+            ViewData["contactListSelectList"] = ContactListSelectList;
+            ViewData["transactionTypeSelectList"] = transactionTypeSelectList;
+            ViewData["paymentMethodSelectList"] = paymentMethodSelectList;
             return View();
         }
+
 
         // POST: Donations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -80,6 +93,20 @@ namespace Assignment1.Controllers
             {
                 return NotFound();
             }
+
+            var transactionTypes = _context.TransactionType.Select(x => x.TransactionTypeId).Distinct().ToList();
+            var transactionTypeSelectList = new SelectList(transactionTypes);
+
+            var paymentMethods = _context.PaymentMethod.Select(x => x.PaymentMethodId).Distinct().ToList();
+            var paymentMethodSelectList = new SelectList(paymentMethods);
+
+            var ContactList = _context.ContactList.Select(x => x.AccountNo).Distinct().ToList();
+            var ContactListSelectList = new SelectList(ContactList);
+
+            ViewData["contactListSelectList"] = ContactListSelectList;
+            ViewData["transactionTypeSelectList"] = transactionTypeSelectList;
+            ViewData["paymentMethodSelectList"] = paymentMethodSelectList;
+            
             return View(donations);
         }
 
