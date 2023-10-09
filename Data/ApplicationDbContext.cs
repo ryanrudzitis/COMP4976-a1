@@ -1,4 +1,4 @@
-﻿using Assignment1.Models;
+using Assignment1.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,4 +24,16 @@ public class ApplicationDbContext : IdentityDbContext<XUser, XRole, string>
         builder.SeedUsersRoles();
         builder.Seed();
     }
+
+    // for seeding
+    public DbSet<Assignment1.Models.ContactList> ContactList { get; set; } = default!;
+
+    // for seeding
+    public DbSet<Assignment1.Models.TransactionType> TransactionType { get; set; } = default!;
+
+    // for seeding
+    public DbSet<Assignment1.Models.PaymentMethod> PaymentMethod { get; set; } = default!;
+
+    // for seeding
+    public DbSet<Assignment1.Models.Donations> Donations { get; set; } = default!;
 }
