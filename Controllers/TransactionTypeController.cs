@@ -48,6 +48,8 @@ namespace Assignment1.Controllers
         // GET: TransactionType/Create
         public IActionResult Create()
         {
+
+
             return View();
         }
 
@@ -56,10 +58,15 @@ namespace Assignment1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TransactionTypeId,Name,Description,Created,Modified,CreatedBy,ModifiedBy")] TransactionType transactionType)
+        public async Task<IActionResult> Create([Bind("TransactionTypeId,Name,Description")] TransactionType transactionType)
         {
             if (ModelState.IsValid)
             {
+                transactionType.Created = DateTime.Now;
+                transactionType.Modified = DateTime.Now;
+                transactionType.CreatedBy = User.Identity!.Name;
+                transactionType.ModifiedBy = User.Identity!.Name;
+
                 _context.Add(transactionType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -80,6 +87,9 @@ namespace Assignment1.Controllers
             {
                 return NotFound();
             }
+
+            transactionType.Modified = DateTime.Now;
+            transactionType.ModifiedBy = User.Identity!.Name;
             return View(transactionType);
         }
 

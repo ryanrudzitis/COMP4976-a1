@@ -69,10 +69,18 @@ namespace Assignment1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TransId,Date,AccountNo,TransactionTypeId,Amount,PaymentMethodId,Notes,Created,Modified,CreatedBy,ModifiedBy")] Donations donations)
+        public async Task<IActionResult> Create([Bind("TransId,Date,AccountNo,TransactionTypeId,Amount,PaymentMethodId,Notes")] Donations donations)
         {
+            // get username of logged in user
+            var userName = User.Identity!.Name;
             if (ModelState.IsValid)
             {
+
+                donations.Created = DateTime.Now;
+                donations.Modified = DateTime.Now;
+                donations.CreatedBy = userName;
+                donations.ModifiedBy = userName;
+
                 _context.Add(donations);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,6 +102,12 @@ namespace Assignment1.Controllers
                 return NotFound();
             }
 
+            var userName = User.Identity!.Name;
+            donations.Modified = DateTime.Now;
+            donations.ModifiedBy = userName;
+
+            // get values for foreign key dropdowns
+
             var transactionTypes = _context.TransactionType.Select(x => x.TransactionTypeId).Distinct().ToList();
             var transactionTypeSelectList = new SelectList(transactionTypes);
 
@@ -106,7 +120,7 @@ namespace Assignment1.Controllers
             ViewData["contactListSelectList"] = ContactListSelectList;
             ViewData["transactionTypeSelectList"] = transactionTypeSelectList;
             ViewData["paymentMethodSelectList"] = paymentMethodSelectList;
-            
+
             return View(donations);
         }
 

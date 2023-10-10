@@ -56,10 +56,15 @@ namespace Assignment1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AccountNo,FirstName,LastName,Email,Street,City,PostalCode,Country,Created,Modified,CreatedBy,ModifiedBy")] ContactList contactList)
+        public async Task<IActionResult> Create([Bind("AccountNo,FirstName,LastName,Email,Street,City,PostalCode,Country")] ContactList contactList)
         {
             if (ModelState.IsValid)
             {
+                contactList.Created = DateTime.Now;
+                contactList.Modified = DateTime.Now;
+                contactList.CreatedBy = User.Identity!.Name;
+                contactList.ModifiedBy = User.Identity!.Name;
+
                 _context.Add(contactList);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -80,6 +85,10 @@ namespace Assignment1.Controllers
             {
                 return NotFound();
             }
+
+            contactList.Modified = DateTime.Now;
+            contactList.ModifiedBy = User.Identity!.Name;
+
             return View(contactList);
         }
 

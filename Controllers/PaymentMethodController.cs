@@ -56,10 +56,15 @@ namespace Assignment1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PaymentMethodId,Name,Created,Modified,CreatedBy,ModifiedBy")] PaymentMethod paymentMethod)
+        public async Task<IActionResult> Create([Bind("PaymentMethodId,Name")] PaymentMethod paymentMethod)
         {
             if (ModelState.IsValid)
             {
+                paymentMethod.Created = DateTime.Now;
+                paymentMethod.Modified = DateTime.Now;
+                paymentMethod.CreatedBy = User.Identity!.Name;
+                paymentMethod.ModifiedBy = User.Identity!.Name;
+
                 _context.Add(paymentMethod);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -80,6 +85,9 @@ namespace Assignment1.Controllers
             {
                 return NotFound();
             }
+
+            paymentMethod.Modified = DateTime.Now;
+            paymentMethod.ModifiedBy = User.Identity!.Name;
             return View(paymentMethod);
         }
 
