@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Assignment1.Data;
 using Assignment1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assignment1.Controllers
 {
+     [Authorize(Roles = "Admin,Finance")]
     public class DonationsController : Controller
     {
+
         private readonly ApplicationDbContext _context;
 
         public DonationsController(ApplicationDbContext context)
