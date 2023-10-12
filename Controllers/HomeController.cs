@@ -14,15 +14,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    [Authorize(Roles = "Admin")]
     public IActionResult Index()
-    {
-        return View();
-    }
-
-    [Authorize(Roles = "Finance")]
-
-    public IActionResult Privacy()
     {
         return View();
     }
