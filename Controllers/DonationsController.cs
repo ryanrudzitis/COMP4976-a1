@@ -7,14 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Assignment1.Data;
 using Assignment1.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Assignment1.Controllers
 {
-    [Authorize(Roles = "Admin,Finance")]
     public class DonationsController : Controller
     {
-
         private readonly ApplicationDbContext _context;
 
         public DonationsController(ApplicationDbContext context)
@@ -25,11 +22,8 @@ namespace Assignment1.Controllers
         // GET: Donations
         public async Task<IActionResult> Index()
         {
-            var donations = await _context.Donations.Include(d => d.Account).Include(d => d.PaymentMethod).Include(d => d.TransactionType).ToListAsync();
-            return _context.Donations != null ?
-
-                        View(donations) :
-                        Problem("Entity set 'ApplicationDbContext.Donations'  is null.");
+            var applicationDbContext = _context.Donations.Include(d => d.Account).Include(d => d.PaymentMethod).Include(d => d.TransactionType);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Donations/Details/5
@@ -41,6 +35,9 @@ namespace Assignment1.Controllers
             }
 
             var donations = await _context.Donations
+                .Include(d => d.Account)
+                .Include(d => d.PaymentMethod)
+                .Include(d => d.TransactionType)
                 .FirstOrDefaultAsync(m => m.TransId == id);
             if (donations == null)
             {
@@ -53,52 +50,33 @@ namespace Assignment1.Controllers
         // GET: Donations/Create
         public IActionResult Create()
         {
-            var transactionTypes = _context.TransactionType.Select(x => x.TransactionTypeId).Distinct().ToList();
-            // now get all the transaction type names using the ids
-            var transactionTypeNames = new List<string>();
-            foreach (var id in transactionTypes)
-            {
-                var transactionTypeName = _context.TransactionType.Where(x => x.TransactionTypeId == id).Select(x => x.Name).FirstOrDefault();
-                transactionTypeNames.Add(transactionTypeName!);
-            }
-            // var transactionTypeSelectList = new SelectList(transactionTypes);
-            var transactionTypeSelectList = new SelectList(transactionTypeNames);
-
-            var paymentMethods = _context.PaymentMethod.Select(x => x.PaymentMethodId).Distinct().ToList();
-            var paymentMethodSelectList = new SelectList(paymentMethods);
-
-            var ContactList = _context.ContactList.Select(x => x.AccountNo).Distinct().ToList();
-            Console.WriteLine(ContactList);
-            var ContactListSelectList = new SelectList(ContactList);
-
-            ViewData["transactionTypeSelectList"] = transactionTypeSelectList;
-            ViewData["contactListSelectList"] = ContactListSelectList;
-            ViewData["paymentMethodSelectList"] = paymentMethodSelectList;
+            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "AccountNo");
+            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethod, "PaymentMethodId", "Name");
+            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionType, "TransactionTypeId", "Name");
             return View();
         }
-
 
         // POST: Donations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TransId,Date,AccountNo,TransactionTypeId,Amount,PaymentMethodId,Notes")] Donations donations)
+        public async Task<IActionResult> Create([Bind("TransId,TransactionTypeId,AccountNo,PaymentMethodId,Date,Amount,Notes")] Donations donations)
         {
-            // get username of logged in user
-            var userName = User.Identity!.Name;
             if (ModelState.IsValid)
             {
-
                 donations.Created = DateTime.Now;
                 donations.Modified = DateTime.Now;
-                donations.CreatedBy = userName;
-                donations.ModifiedBy = userName;
-
+                donations.CreatedBy = User.Identity!.Name;
+                donations.ModifiedBy = User.Identity!.Name;
                 _context.Add(donations);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "AccountNo", donations.AccountNo);
+            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethod, "PaymentMethodId", "PaymentMethodId", donations.PaymentMethodId);
+            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionType, "TransactionTypeId", "TransactionTypeId", donations.TransactionTypeId);
+
             return View(donations);
         }
 
@@ -115,25 +93,9 @@ namespace Assignment1.Controllers
             {
                 return NotFound();
             }
-
-            var userName = User.Identity!.Name;
-            donations.Modified = DateTime.Now;
-            donations.ModifiedBy = userName;
-
-            // get values for foreign key dropdowns
-
-            var transactionTypes = _context.TransactionType.Select(x => x.TransactionTypeId).Distinct().ToList();
-            var transactionTypeSelectList = new SelectList(transactionTypes);
-
-            var paymentMethods = _context.PaymentMethod.Select(x => x.PaymentMethodId).Distinct().ToList();
-            var paymentMethodSelectList = new SelectList(paymentMethods);
-
-            var ContactList = _context.ContactList.Select(x => x.AccountNo).Distinct().ToList();
-            var ContactListSelectList = new SelectList(ContactList);
-
-            ViewData["contactListSelectList"] = ContactListSelectList;
-            ViewData["transactionTypeSelectList"] = transactionTypeSelectList;
-            ViewData["paymentMethodSelectList"] = paymentMethodSelectList;
+            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "AccountNo", donations.AccountNo);
+            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethod, "PaymentMethodId", "Name", donations.PaymentMethodId);
+            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionType, "TransactionTypeId", "Name", donations.TransactionTypeId);
 
             return View(donations);
         }
@@ -143,7 +105,7 @@ namespace Assignment1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TransId,Date,AccountNo,TransactionTypeId,Amount,PaymentMethodId,Notes,Created,Modified,CreatedBy,ModifiedBy")] Donations donations)
+        public async Task<IActionResult> Edit(int id, [Bind("TransId,TransactionTypeId,AccountNo,PaymentMethodId,Date,Amount,Notes, Created, Modified, CreatedBy, ModifiedBy")] Donations donations)
         {
             if (id != donations.TransId)
             {
@@ -154,6 +116,8 @@ namespace Assignment1.Controllers
             {
                 try
                 {
+                    donations.Modified = DateTime.Now;
+                    donations.ModifiedBy = User.Identity!.Name;
                     _context.Update(donations);
                     await _context.SaveChangesAsync();
                 }
@@ -170,6 +134,9 @@ namespace Assignment1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "AccountNo", donations.AccountNo);
+            ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethod, "PaymentMethodId", "PaymentMethodId", donations.PaymentMethodId);
+            ViewData["TransactionTypeId"] = new SelectList(_context.TransactionType, "TransactionTypeId", "TransactionTypeId", donations.TransactionTypeId);
             return View(donations);
         }
 
@@ -182,6 +149,9 @@ namespace Assignment1.Controllers
             }
 
             var donations = await _context.Donations
+                .Include(d => d.Account)
+                .Include(d => d.PaymentMethod)
+                .Include(d => d.TransactionType)
                 .FirstOrDefaultAsync(m => m.TransId == id);
             if (donations == null)
             {

@@ -22,9 +22,9 @@ namespace Assignment1.Controllers
         // GET: ContactList
         public async Task<IActionResult> Index()
         {
-              return _context.ContactList != null ? 
-                          View(await _context.ContactList.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.ContactList'  is null.");
+            return _context.ContactList != null ?
+                        View(await _context.ContactList.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.ContactList'  is null.");
         }
 
         // GET: ContactList/Details/5
@@ -48,6 +48,8 @@ namespace Assignment1.Controllers
         // GET: ContactList/Create
         public IActionResult Create()
         {
+
+
             return View();
         }
 
@@ -64,7 +66,6 @@ namespace Assignment1.Controllers
                 contactList.Modified = DateTime.Now;
                 contactList.CreatedBy = User.Identity!.Name;
                 contactList.ModifiedBy = User.Identity!.Name;
-
                 _context.Add(contactList);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,10 +86,6 @@ namespace Assignment1.Controllers
             {
                 return NotFound();
             }
-
-            contactList.Modified = DateTime.Now;
-            contactList.ModifiedBy = User.Identity!.Name;
-
             return View(contactList);
         }
 
@@ -97,7 +94,7 @@ namespace Assignment1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AccountNo,FirstName,LastName,Email,Street,City,PostalCode,Country,Created,Modified,CreatedBy,ModifiedBy")] ContactList contactList)
+        public async Task<IActionResult> Edit(int id, [Bind("AccountNo,FirstName,LastName,Email,Street,City,PostalCode,Country, Created, Modified, CreatedBy, ModifiedBy")] ContactList contactList)
         {
             if (id != contactList.AccountNo)
             {
@@ -108,6 +105,9 @@ namespace Assignment1.Controllers
             {
                 try
                 {
+                    contactList.Modified = DateTime.Now;
+                    contactList.ModifiedBy = User.Identity!.Name;
+
                     _context.Update(contactList);
                     await _context.SaveChangesAsync();
                 }
@@ -159,14 +159,14 @@ namespace Assignment1.Controllers
             {
                 _context.ContactList.Remove(contactList);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ContactListExists(int id)
         {
-          return (_context.ContactList?.Any(e => e.AccountNo == id)).GetValueOrDefault();
+            return (_context.ContactList?.Any(e => e.AccountNo == id)).GetValueOrDefault();
         }
     }
 }

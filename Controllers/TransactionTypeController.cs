@@ -22,9 +22,9 @@ namespace Assignment1.Controllers
         // GET: TransactionType
         public async Task<IActionResult> Index()
         {
-              return _context.TransactionType != null ? 
-                          View(await _context.TransactionType.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.TransactionType'  is null.");
+            return _context.TransactionType != null ?
+                        View(await _context.TransactionType.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.TransactionType'  is null.");
         }
 
         // GET: TransactionType/Details/5
@@ -48,8 +48,6 @@ namespace Assignment1.Controllers
         // GET: TransactionType/Create
         public IActionResult Create()
         {
-
-
             return View();
         }
 
@@ -58,7 +56,7 @@ namespace Assignment1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TransactionTypeId,Name,Description")] TransactionType transactionType)
+        public async Task<IActionResult> Create([Bind("TransactionTypeId,Name,Description, Created, Modified, CreatedBy, ModifiedBy")] TransactionType transactionType)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +64,6 @@ namespace Assignment1.Controllers
                 transactionType.Modified = DateTime.Now;
                 transactionType.CreatedBy = User.Identity!.Name;
                 transactionType.ModifiedBy = User.Identity!.Name;
-
                 _context.Add(transactionType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -88,8 +85,6 @@ namespace Assignment1.Controllers
                 return NotFound();
             }
 
-            transactionType.Modified = DateTime.Now;
-            transactionType.ModifiedBy = User.Identity!.Name;
             return View(transactionType);
         }
 
@@ -109,6 +104,8 @@ namespace Assignment1.Controllers
             {
                 try
                 {
+                    transactionType.Modified = DateTime.Now;
+                    transactionType.ModifiedBy = User.Identity!.Name;
                     _context.Update(transactionType);
                     await _context.SaveChangesAsync();
                 }
@@ -160,14 +157,14 @@ namespace Assignment1.Controllers
             {
                 _context.TransactionType.Remove(transactionType);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TransactionTypeExists(int id)
         {
-          return (_context.TransactionType?.Any(e => e.TransactionTypeId == id)).GetValueOrDefault();
+            return (_context.TransactionType?.Any(e => e.TransactionTypeId == id)).GetValueOrDefault();
         }
     }
 }

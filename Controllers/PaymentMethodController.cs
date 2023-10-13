@@ -22,9 +22,9 @@ namespace Assignment1.Controllers
         // GET: PaymentMethod
         public async Task<IActionResult> Index()
         {
-              return _context.PaymentMethod != null ? 
-                          View(await _context.PaymentMethod.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.PaymentMethod'  is null.");
+            return _context.PaymentMethod != null ?
+                        View(await _context.PaymentMethod.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.PaymentMethod'  is null.");
         }
 
         // GET: PaymentMethod/Details/5
@@ -64,7 +64,6 @@ namespace Assignment1.Controllers
                 paymentMethod.Modified = DateTime.Now;
                 paymentMethod.CreatedBy = User.Identity!.Name;
                 paymentMethod.ModifiedBy = User.Identity!.Name;
-
                 _context.Add(paymentMethod);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,8 +85,6 @@ namespace Assignment1.Controllers
                 return NotFound();
             }
 
-            paymentMethod.Modified = DateTime.Now;
-            paymentMethod.ModifiedBy = User.Identity!.Name;
             return View(paymentMethod);
         }
 
@@ -96,7 +93,7 @@ namespace Assignment1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PaymentMethodId,Name,Created,Modified,CreatedBy,ModifiedBy")] PaymentMethod paymentMethod)
+        public async Task<IActionResult> Edit(int id, [Bind("PaymentMethodId,Name, Created, Modified, CreatedBy, ModifiedBy")] PaymentMethod paymentMethod)
         {
             if (id != paymentMethod.PaymentMethodId)
             {
@@ -107,6 +104,8 @@ namespace Assignment1.Controllers
             {
                 try
                 {
+                    paymentMethod.Modified = DateTime.Now;
+                    paymentMethod.ModifiedBy = User.Identity!.Name;
                     _context.Update(paymentMethod);
                     await _context.SaveChangesAsync();
                 }
@@ -158,14 +157,14 @@ namespace Assignment1.Controllers
             {
                 _context.PaymentMethod.Remove(paymentMethod);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PaymentMethodExists(int id)
         {
-          return (_context.PaymentMethod?.Any(e => e.PaymentMethodId == id)).GetValueOrDefault();
+            return (_context.PaymentMethod?.Any(e => e.PaymentMethodId == id)).GetValueOrDefault();
         }
     }
 }

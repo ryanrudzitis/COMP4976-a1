@@ -16,16 +16,16 @@
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AccountNo)
+                @Html.DisplayNameFor(model => model.Account)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TransactionTypeId)
+                @Html.DisplayNameFor(model => model.TransactionType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Amount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PaymentMethodId)
+                @Html.DisplayNameFor(model => model.PaymentMethod)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Notes)
@@ -52,16 +52,16 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccountNo)
+                @Html.DisplayFor(modelItem => item.Account.AccountNo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TransactionTypeId)
+                @Html.DisplayFor(modelItem => item.TransactionType.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaymentMethodId)
+                @Html.DisplayFor(modelItem => item.PaymentMethod.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
