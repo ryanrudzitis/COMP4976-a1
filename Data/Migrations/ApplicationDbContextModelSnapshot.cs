@@ -66,13 +66,13 @@ namespace Assignment1.Data.Migrations
                             AccountNo = 1,
                             City = "Maple Ridge",
                             Country = "Canada",
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6700),
-                            CreatedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7700),
+                            CreatedBy = "a@a.a",
                             Email = "john.doe@example.com",
                             FirstName = "John",
                             LastName = "Doe",
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6710),
-                            ModifiedBy = "Admin",
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7710),
+                            ModifiedBy = "a@a.a",
                             PostalCode = "12345",
                             Street = "123 Main St"
                         },
@@ -81,13 +81,13 @@ namespace Assignment1.Data.Migrations
                             AccountNo = 2,
                             City = "Dallas",
                             Country = "USA",
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6710),
-                            CreatedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7720),
+                            CreatedBy = "a@a.a",
                             Email = "jane.smith@example.com",
                             FirstName = "Jane",
                             LastName = "Smith",
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6710),
-                            ModifiedBy = "Admin",
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7720),
+                            ModifiedBy = "a@a.a",
                             PostalCode = "67890",
                             Street = "456 Elm St"
                         },
@@ -96,13 +96,13 @@ namespace Assignment1.Data.Migrations
                             AccountNo = 3,
                             City = "Oakville",
                             Country = "Canada",
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6720),
-                            CreatedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7720),
+                            CreatedBy = "a@a.a",
                             Email = "alice.johnson@example.com",
                             FirstName = "Alice",
                             LastName = "Johnson",
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(6720),
-                            ModifiedBy = "Admin",
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7720),
+                            ModifiedBy = "a@a.a",
                             PostalCode = "54321",
                             Street = "789 Oak St"
                         });
@@ -146,6 +146,12 @@ namespace Assignment1.Data.Migrations
 
                     b.HasKey("TransId");
 
+                    b.HasIndex("AccountNo");
+
+                    b.HasIndex("PaymentMethodId");
+
+                    b.HasIndex("TransactionTypeId");
+
                     b.ToTable("Donations");
 
                     b.HasData(
@@ -154,11 +160,11 @@ namespace Assignment1.Data.Migrations
                             TransId = 1,
                             AccountNo = 1,
                             Amount = 100f,
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170),
-                            CreatedBy = "Admin",
-                            Date = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7160),
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170),
-                            ModifiedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7800),
+                            CreatedBy = "a@a.a",
+                            Date = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7790),
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7800),
+                            ModifiedBy = "a@a.a",
                             Notes = "Donation 1",
                             PaymentMethodId = 1,
                             TransactionTypeId = 1
@@ -168,11 +174,11 @@ namespace Assignment1.Data.Migrations
                             TransId = 2,
                             AccountNo = 2,
                             Amount = 200f,
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170),
-                            CreatedBy = "Admin",
-                            Date = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170),
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7170),
-                            ModifiedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7810),
+                            CreatedBy = "a@a.a",
+                            Date = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7800),
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7810),
+                            ModifiedBy = "a@a.a",
                             Notes = "Dontation 2",
                             PaymentMethodId = 2,
                             TransactionTypeId = 2
@@ -182,11 +188,11 @@ namespace Assignment1.Data.Migrations
                             TransId = 3,
                             AccountNo = 3,
                             Amount = 300f,
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7180),
-                            CreatedBy = "Admin",
-                            Date = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7180),
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(7180),
-                            ModifiedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7810),
+                            CreatedBy = "a@a.a",
+                            Date = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7810),
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7810),
+                            ModifiedBy = "a@a.a",
                             Notes = "Donation 3",
                             PaymentMethodId = 3,
                             TransactionTypeId = 3
@@ -222,28 +228,28 @@ namespace Assignment1.Data.Migrations
                         new
                         {
                             PaymentMethodId = 1,
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2610),
-                            CreatedBy = "Admin",
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2620),
-                            ModifiedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7770),
+                            CreatedBy = "a@a.a",
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7770),
+                            ModifiedBy = "a@a.a",
                             Name = "Cash"
                         },
                         new
                         {
                             PaymentMethodId = 2,
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2620),
-                            CreatedBy = "Admin",
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2630),
-                            ModifiedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7770),
+                            CreatedBy = "a@a.a",
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7780),
+                            ModifiedBy = "a@a.a",
                             Name = "Credit Card"
                         },
                         new
                         {
                             PaymentMethodId = 3,
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2630),
-                            CreatedBy = "Admin",
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 356, DateTimeKind.Local).AddTicks(2630),
-                            ModifiedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7780),
+                            CreatedBy = "a@a.a",
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7780),
+                            ModifiedBy = "a@a.a",
                             Name = "PayPal"
                         });
                 });
@@ -280,31 +286,31 @@ namespace Assignment1.Data.Migrations
                         new
                         {
                             TransactionTypeId = 1,
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9900),
-                            CreatedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7750),
+                            CreatedBy = "a@a.a",
                             Description = "Donation",
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9910),
-                            ModifiedBy = "Admin",
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7750),
+                            ModifiedBy = "a@a.a",
                             Name = "Donation"
                         },
                         new
                         {
                             TransactionTypeId = 2,
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9920),
-                            CreatedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7750),
+                            CreatedBy = "a@a.a",
                             Description = "Pledge",
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9920),
-                            ModifiedBy = "Admin",
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7750),
+                            ModifiedBy = "a@a.a",
                             Name = "Pledge"
                         },
                         new
                         {
                             TransactionTypeId = 3,
-                            Created = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9920),
-                            CreatedBy = "Admin",
+                            Created = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7750),
+                            CreatedBy = "a@a.a",
                             Description = "Event",
-                            Modified = new DateTime(2023, 10, 9, 13, 2, 16, 355, DateTimeKind.Local).AddTicks(9920),
-                            ModifiedBy = "Admin",
+                            Modified = new DateTime(2023, 10, 12, 21, 21, 40, 902, DateTimeKind.Local).AddTicks(7750),
+                            ModifiedBy = "a@a.a",
                             Name = "Event"
                         });
                 });
@@ -340,15 +346,15 @@ namespace Assignment1.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5eb2dd08-4d52-47ea-8294-029420855d8a",
-                            CreatedDate = new DateTime(2023, 10, 9, 13, 2, 16, 281, DateTimeKind.Local).AddTicks(4340),
+                            Id = "867eac6e-d939-4ae9-8a7b-c3c6d4868777",
+                            CreatedDate = new DateTime(2023, 10, 12, 21, 21, 40, 828, DateTimeKind.Local).AddTicks(780),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8ee2052e-c563-4452-a8dd-e207d94fb658",
-                            CreatedDate = new DateTime(2023, 10, 9, 13, 2, 16, 281, DateTimeKind.Local).AddTicks(4410),
+                            Id = "ba1b347b-8a9b-4597-a057-9b28d2b26675",
+                            CreatedDate = new DateTime(2023, 10, 12, 21, 21, 40, 828, DateTimeKind.Local).AddTicks(870),
                             Name = "Finance",
                             NormalizedName = "FINANCE"
                         });
@@ -420,33 +426,33 @@ namespace Assignment1.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d29ed9a1-475f-4478-902d-177729b635b6",
+                            Id = "ff725bcb-20dd-4ce8-ae35-519d4c418b27",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3a1bde5d-bcfa-4504-8d2b-8e35cdf29160",
+                            ConcurrencyStamp = "12fa0155-45bf-403e-b0c8-633c3d01082f",
                             Email = "a@a.a",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "A@A.A",
                             NormalizedUserName = "A@A.A",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN8QggkqtMwembp6Bf8BqbJv/YhmK0eag2O8UWMh1rX6rKKjs+5xntCQ1O1FTZZtEA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKQuu04n4u8l622b88C2ig0QRrxbDKGJJ/4X/OOvz6hh8H90pdr0gu0uEN/6SUKl2w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "66ec0a01-4e77-49b2-923b-e85739bd1369",
+                            SecurityStamp = "42ed5b83-bcb7-4402-af4e-7af23b2c87cb",
                             TwoFactorEnabled = false,
                             UserName = "a@a.a"
                         },
                         new
                         {
-                            Id = "e806193e-c63a-4bd4-aead-9c052c77b69c",
+                            Id = "1e54bc8f-e32e-4a63-b2db-c3d6eb6e6d62",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49cb53e3-ed28-4b77-b4dd-7e86ff20b42f",
+                            ConcurrencyStamp = "c9d19113-5a00-48f2-85c5-0aa5b73ad363",
                             Email = "f@f.f",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "F@F.F",
                             NormalizedUserName = "F@F.F",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO0NzvQ087CZPAGfJFo4jpRBA4r1feDnfFFl14Rb/i4Plb6A5h/CStxrwYIxxcakXg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI4UIyh0/pfV1fL7qUgOjTR2UFKVK0zu6is254E5LimFNTkJUeQcKTcf/Y/m8ft3Uw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6f4d9553-5022-489f-bdc9-2a55de63295d",
+                            SecurityStamp = "755b7bb6-1100-4b58-b1bc-559f15e0518a",
                             TwoFactorEnabled = false,
                             UserName = "f@f.f"
                         });
@@ -539,13 +545,13 @@ namespace Assignment1.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d29ed9a1-475f-4478-902d-177729b635b6",
-                            RoleId = "5eb2dd08-4d52-47ea-8294-029420855d8a"
+                            UserId = "ff725bcb-20dd-4ce8-ae35-519d4c418b27",
+                            RoleId = "867eac6e-d939-4ae9-8a7b-c3c6d4868777"
                         },
                         new
                         {
-                            UserId = "e806193e-c63a-4bd4-aead-9c052c77b69c",
-                            RoleId = "8ee2052e-c563-4452-a8dd-e207d94fb658"
+                            UserId = "1e54bc8f-e32e-4a63-b2db-c3d6eb6e6d62",
+                            RoleId = "ba1b347b-8a9b-4597-a057-9b28d2b26675"
                         });
                 });
 
@@ -568,6 +574,33 @@ namespace Assignment1.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Assignment1.Models.Donations", b =>
+                {
+                    b.HasOne("Assignment1.Models.ContactList", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountNo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Assignment1.Models.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Assignment1.Models.TransactionType", "TransactionType")
+                        .WithMany()
+                        .HasForeignKey("TransactionTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+
+                    b.Navigation("PaymentMethod");
+
+                    b.Navigation("TransactionType");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

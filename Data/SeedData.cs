@@ -46,8 +46,8 @@ namespace Assignment1.Data
                     Country = "Canada",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 },
                 new() {
                     AccountNo = 2,
@@ -60,8 +60,8 @@ namespace Assignment1.Data
                     Country = "USA",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 },
                 new() {
                     AccountNo = 3,
@@ -74,8 +74,8 @@ namespace Assignment1.Data
                     Country = "Canada",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 }
             };
             return lists;
@@ -91,8 +91,8 @@ namespace Assignment1.Data
                     Description = "Donation",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 },
                 new() {
                     TransactionTypeId = 2,
@@ -100,8 +100,8 @@ namespace Assignment1.Data
                     Description = "Pledge",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 },
                 new() {
                     TransactionTypeId = 3,
@@ -109,8 +109,8 @@ namespace Assignment1.Data
                     Description = "Event",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 }
             };
             return types;
@@ -125,24 +125,24 @@ namespace Assignment1.Data
                     Name = "Cash",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 },
                 new PaymentMethod {
                     PaymentMethodId = 2,
                     Name = "Credit Card",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 },
                 new PaymentMethod {
                     PaymentMethodId = 3,
                     Name = "PayPal",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 }
             };
             return methods;
@@ -162,8 +162,8 @@ namespace Assignment1.Data
                     Notes = "Donation 1",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 },
                 new() {
                     TransId = 2,
@@ -175,8 +175,8 @@ namespace Assignment1.Data
                     Notes = "Dontation 2",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 },
                 new() {
                     TransId = 3,
@@ -188,8 +188,8 @@ namespace Assignment1.Data
                     Notes = "Donation 3",
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
-                    CreatedBy = "Admin",
-                    ModifiedBy = "Admin"
+                    CreatedBy = "a@a.a",
+                    ModifiedBy = "a@a.a"
                 }
             };
             return donations;

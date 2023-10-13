@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Assignment1.Controllers
 {
-     [Authorize(Roles = "Admin,Finance")]
+    [Authorize(Roles = "Admin,Finance")]
     public class DonationsController : Controller
     {
 
@@ -25,9 +25,11 @@ namespace Assignment1.Controllers
         // GET: Donations
         public async Task<IActionResult> Index()
         {
-              return _context.Donations != null ? 
-                          View(await _context.Donations.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Donations'  is null.");
+            var donations = await _context.Donations.Include(d => d.Account).Include(d => d.PaymentMethod).Include(d => d.TransactionType).ToListAsync();
+            return _context.Donations != null ?
+
+                        View(donations) :
+                        Problem("Entity set 'ApplicationDbContext.Donations'  is null.");
         }
 
         // GET: Donations/Details/5
@@ -52,16 +54,25 @@ namespace Assignment1.Controllers
         public IActionResult Create()
         {
             var transactionTypes = _context.TransactionType.Select(x => x.TransactionTypeId).Distinct().ToList();
-            var transactionTypeSelectList = new SelectList(transactionTypes);
+            // now get all the transaction type names using the ids
+            var transactionTypeNames = new List<string>();
+            foreach (var id in transactionTypes)
+            {
+                var transactionTypeName = _context.TransactionType.Where(x => x.TransactionTypeId == id).Select(x => x.Name).FirstOrDefault();
+                transactionTypeNames.Add(transactionTypeName!);
+            }
+            // var transactionTypeSelectList = new SelectList(transactionTypes);
+            var transactionTypeSelectList = new SelectList(transactionTypeNames);
 
             var paymentMethods = _context.PaymentMethod.Select(x => x.PaymentMethodId).Distinct().ToList();
             var paymentMethodSelectList = new SelectList(paymentMethods);
 
             var ContactList = _context.ContactList.Select(x => x.AccountNo).Distinct().ToList();
+            Console.WriteLine(ContactList);
             var ContactListSelectList = new SelectList(ContactList);
 
-            ViewData["contactListSelectList"] = ContactListSelectList;
             ViewData["transactionTypeSelectList"] = transactionTypeSelectList;
+            ViewData["contactListSelectList"] = ContactListSelectList;
             ViewData["paymentMethodSelectList"] = paymentMethodSelectList;
             return View();
         }
@@ -194,14 +205,14 @@ namespace Assignment1.Controllers
             {
                 _context.Donations.Remove(donations);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DonationsExists(int id)
         {
-          return (_context.Donations?.Any(e => e.TransId == id)).GetValueOrDefault();
+            return (_context.Donations?.Any(e => e.TransId == id)).GetValueOrDefault();
         }
     }
 }

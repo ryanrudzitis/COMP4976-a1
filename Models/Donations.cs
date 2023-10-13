@@ -12,21 +12,28 @@ namespace Assignment1.Models
         [Key]
         [Display(Name = "Transaction ID")]
         public int TransId { get; set; }
-        public DateTime Date { get; set; }
+        public int TransactionTypeId { get; set; }
         
-        [ForeignKey("ContactList")]
-        [Display(Name = "Account Number")]
         public int AccountNo { get; set; }
 
-        [ForeignKey("TransactionType")]
+        public int PaymentMethodId { get; set; }
+
+        public DateTime Date { get; set; }
+        
+        [ForeignKey("AccountNo")]
+        [Display(Name = "Account Number")]
+        public ContactList? Account { get; set; }
+
+        [ForeignKey("TransactionTypeId")]
         [Display(Name = "Transaction Type")]
-        public int TransactionTypeId { get; set; }
+        public TransactionType? TransactionType { get; set; }
 
         public float Amount { get; set; }
 
-        [ForeignKey("PaymentMethod")]
+        [ForeignKey("PaymentMethodId")]
         [Display(Name = "Payment Method")]
-        public int PaymentMethodId { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
+        // public int PaymentMethodId { get; set; }
 
         public string? Notes { get; set; }
         public DateTime Created { get; set; }
