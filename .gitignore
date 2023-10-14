@@ -1,2 +1,9 @@
 .DS_Store
 DS_Store
+/bin/
+/obj/
+app.db
+app.db-shm
+app.db-wal
+
+
