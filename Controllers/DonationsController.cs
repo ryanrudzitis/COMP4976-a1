@@ -184,5 +184,28 @@ namespace Assignment1.Controllers
         {
             return (_context.Donations?.Any(e => e.TransId == id)).GetValueOrDefault();
         }
+
+        public async Task<IActionResult> Report()
+        {
+            var donations = await _context.Donations.ToListAsync();
+            var donationsByYear = new Dictionary<int, float>();
+
+            foreach (var donation in donations)
+            {
+                var year = donation.Date.Year;
+                var amount = donation.Amount;
+
+                if (donationsByYear.ContainsKey(year))
+                {
+                    donationsByYear[year] += amount;
+                }
+                else
+                {
+                    donationsByYear.Add(year, amount);
+                }
+            }
+
+            return View(donationsByYear);
+        }   
     }
 }

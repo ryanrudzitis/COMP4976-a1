@@ -1,0 +1,41 @@
+@model ReceiptViewModel
+
+@{
+  ViewData["Title"] = "Receipt";
+  var currentYear = DateTime.Now.Year;
+  float totalAmount = 0;
+
+  foreach (var donation in Model.Donations)
+  {
+    totalAmount += donation.Amount;
+  }
+  
+}
+<h1>Receipt</h1>
+<h4>Date: December 31, @currentYear</h4>
+<br/>
+<h4>Donations made to Non-Profit by @Model.DonorFullName</h4>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="padding-right: 100px">Date</th>
+          <th style="padding-left: 100px">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var donation in Model.Donations)
+        {
+          <tr>
+            <td style="padding-right: 100px">@donation.Date.ToString().Split(" ")[0]</td>
+            <td style="padding-left: 100px">$@donation.Amount</td>
+          </tr>
+
+        }
+        <tr style="border-top: 1px solid black">
+          <td style="padding-right: 100px">Total</td>
+          <td style="padding-left: 100px">$@totalAmount</td>
+        </tr>
+      </tbody>
+    </table>
+

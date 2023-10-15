@@ -168,5 +168,35 @@ namespace Assignment1.Controllers
         {
             return (_context.ContactList?.Any(e => e.AccountNo == id)).GetValueOrDefault();
         }
+
+        public async Task<IActionResult> Receipt(int? id)
+        {
+            if (id == null || _context.ContactList == null)
+            {
+                return NotFound();
+            }
+
+            var currentYear = DateTime.Now.Year;
+
+            // Retrieve the donations associated with the provided "AccountNo" and for the current year.
+            var donations = await _context.Donations
+                .Where(d => d.AccountNo == id && d.Date.Year == currentYear)
+                .ToListAsync();
+
+            // get the full name of the donor
+            var donor = await _context.ContactList
+                .FirstOrDefaultAsync(m => m.AccountNo == id);
+
+            var viewModel = new ReceiptViewModel
+            {
+                Donations = donations,
+                DonorFullName = donor!.FullName!
+            };
+
+            // You can return a view to display these donations or process them as needed.
+            // For example, you can return a view with a list of donations.
+
+            return View(viewModel);
+        }
     }
 }
