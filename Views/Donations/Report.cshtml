@@ -1,0 +1,32 @@
+@model Dictionary<int, float>
+
+@{
+    ViewData["Title"] = "Report";
+}
+
+<h1>Donations</h1>
+
+<style>
+  th, td {
+    padding-right: 100px;
+  }
+</style>
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var donation in Model)
+    {
+      <tr>
+        <td>@donation.Key</td>
+        <td>$@donation.Value</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
