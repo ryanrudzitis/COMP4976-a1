@@ -50,7 +50,7 @@ namespace Assignment1.Controllers
         // GET: Donations/Create
         public IActionResult Create()
         {
-            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "AccountNo");
+            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "FullName");
             ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethod, "PaymentMethodId", "Name");
             ViewData["TransactionTypeId"] = new SelectList(_context.TransactionType, "TransactionTypeId", "Name");
             return View();
@@ -93,7 +93,7 @@ namespace Assignment1.Controllers
             {
                 return NotFound();
             }
-            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "AccountNo", donations.AccountNo);
+            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "FullName", donations.AccountNo);
             ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethod, "PaymentMethodId", "Name", donations.PaymentMethodId);
             ViewData["TransactionTypeId"] = new SelectList(_context.TransactionType, "TransactionTypeId", "Name", donations.TransactionTypeId);
 
@@ -134,7 +134,7 @@ namespace Assignment1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "AccountNo", donations.AccountNo);
+            ViewData["AccountNo"] = new SelectList(_context.ContactList, "AccountNo", "FullName", donations.AccountNo);
             ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethod, "PaymentMethodId", "PaymentMethodId", donations.PaymentMethodId);
             ViewData["TransactionTypeId"] = new SelectList(_context.TransactionType, "TransactionTypeId", "TransactionTypeId", donations.TransactionTypeId);
             return View(donations);

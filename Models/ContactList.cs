@@ -1,11 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Assignment1.Models
 {
     public class ContactList
     {
         [Key]
-        [Display(Name = "Account Number")]
+        [Display(Name = "Account Name")]
         public int AccountNo { get; set; }
 
         [Required(ErrorMessage = "First Name is required.")]
@@ -17,6 +18,14 @@ namespace Assignment1.Models
         [Display(Name = "Last Name")]
         [RegularExpression(@"^[A-Za-z\s]+$", ErrorMessage = "Last Name should not contain numbers.")]
         public string? LastName { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Full Name")]
+        public string? FullName { get {
+                return FirstName + " " + LastName;
+            } 
+        }
+
 
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Invalid Email Address.")]

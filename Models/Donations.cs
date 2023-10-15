@@ -16,7 +16,8 @@ namespace Assignment1.Models
         [Required(ErrorMessage = "Transaction Type ID is required.")]
         public int TransactionTypeId { get; set; }
 
-        [Required(ErrorMessage = "Account Number is required.")]
+        [Display(Name = "Account Name")]
+        [Required(ErrorMessage = "Account Name is required.")]
         public int AccountNo { get; set; }
 
         [Required(ErrorMessage = "Payment Method ID is required.")]
@@ -26,7 +27,7 @@ namespace Assignment1.Models
         public DateTime Date { get; set; }
 
         [ForeignKey("AccountNo")]
-        [Display(Name = "Account Number")]
+        [Display(Name = "Account Name")]
         public ContactList? Account { get; set; }
 
         [ForeignKey("TransactionTypeId")]
