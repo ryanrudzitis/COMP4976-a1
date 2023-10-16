@@ -20,6 +20,7 @@ namespace Assignment1.Models
 
         public DateTime Modified { get; set; }
 
+        [Display(Name = "Created By")]
         public string? CreatedBy { get; set; }
 
         [Display(Name = "Modified By")]
